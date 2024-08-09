@@ -11,6 +11,7 @@ import {
   SIXTY,
 } from './core/constants';
 import routeEmploye from './routes/Employe.routes';
+import routePresence from './routes/Presence.routes';
 import { setupSwagger } from './swagger';
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(
 app.use(cookieParser())
 // Routes
 app.use("/employes",routeEmploye)
+app.use("/attendance",routePresence)
 app.use(morgan('combined'));
 setupSwagger(app);
 export default app;
