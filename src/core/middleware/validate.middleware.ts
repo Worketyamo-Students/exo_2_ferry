@@ -1,19 +1,29 @@
 import {
-    NextFunction,
-    Request,
-    Response,
-  } from 'express';
-  import {
-    body,
-    validationResult,
-  } from 'express-validator';
-  
-  import { HttpCode } from '../constants';
-  
-  const validateInputUser={
+  NextFunction,
+  Request,
+  Response,
+} from 'express';
+import {
+  body,
+  validationResult,
+} from 'express-validator';
+
+import { HttpCode } from '../constants';
+
+const validateInputUser={
   
   
     validation : [
+
+      //vérification du nom 
+      body('nom')
+      .notEmpty()
+      .withMessage('Veuillez entrer un nom')
+      .isString()
+      .withMessage('Le nom doit être une chaîne de caractères')
+      .matches(/^[a-zA-Z\s]+$/)
+      .withMessage('Le nom ne doit pas contenir de caractères spéciaux'),
+
       //validation de l'adresse email
       body('email')
         .isEmail()

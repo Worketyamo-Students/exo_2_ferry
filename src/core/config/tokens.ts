@@ -6,7 +6,7 @@ const mytokens = {
     // Générer un jeton d'accès
     generateAccessToken: (payload:any) => {
         try {
-            return jwt.sign({ payload}, envs.JWT_ACCESS_TOKEN, { expiresIn: '5min' });
+            return jwt.sign({ payload}, envs.JWT_ACCESS_TOKEN, { expiresIn: '30min' });
         } catch (error) {
             console.error( error);
         }
