@@ -43,7 +43,7 @@ model presences {
 model absences {
   absencesID    String         @id @default(auto()) @map("_id") @db.ObjectId
   date          DateTime
-  heureAbsences Int
+  heureAbsences Int 
   employeIDs    String[]       @db.ObjectId
   employes      employes[]     @relation(fields: [employeIDs], references: [employeID])
   // presence      presences?

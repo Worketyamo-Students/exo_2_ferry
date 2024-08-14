@@ -11,7 +11,10 @@ routeEmploye.post('/',
     validateInputUser.validation,
     EmployeController.CreateEmploye);
 routeEmploye.post('/login', EmployeController.LoginEmploye);
-routeEmploye.post('/logout', EmployeController.LogOut);
+routeEmploye.post('/logout', 
+    verifyEmploye.verifyAccessToken, 
+    verifyEmploye.verifyRefreshToken,
+     EmployeController.LogOut);
 routeEmploye.get('/profile',
     verifyEmploye.verifyAccessToken,
     EmployeController.Getemploye);

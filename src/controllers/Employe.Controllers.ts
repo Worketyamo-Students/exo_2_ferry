@@ -113,6 +113,7 @@ const EmployeController = {
     Getemploye: async (req: CustumRequest, res: Response) => {
         try {
             const employe = req.employe
+            console.log(employe)
             const employeID: string = employe.payload.employeID
             const employes = await prisma.employes.findUnique({
                 where: {
