@@ -1,9 +1,0 @@
-employeID,nom,date,heureDebut,heureFin,estpresent,heureAbsences,données
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-14T23:00:00.000Z,12:11:51.456Z,13:07:08.465Z,Non,,Présence
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-15T23:00:00.000Z,09:24:09.829Z,,Oui,,Présence
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-17T00:00:00.000Z,12:36:33.564Z,13:39:48.726Z,Non,,Présence
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-18T00:00:00.000Z,15:28:42.568Z,,Oui,,Présence
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-14T23:00:00.000Z,,,,6,Absence
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-15T23:00:00.000Z,,,,8,Absence
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-16T09:39:38.858Z,,,,2,Absence
-66bb2c8f0b48e863209eceb3,youbi ferry,2024-08-18T00:00:00.000Z,,,,6,Absence
