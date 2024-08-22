@@ -5,61 +5,42 @@ import {
 
 import { PrismaClient } from '@prisma/client';
 
+import CalculHeures from '../core/config/calculHeuresMois';
+import { HttpCode } from '../core/constants';
+import { myerrors } from './Employe.Controllers';
+
 const prisma = new PrismaClient()
 
 
-const AbsenceController = {
+const SalaireController = {
 
-  createAbsence: async (req: Request, res: Response) => {
+    AjusterSalaire: async (req: Request, res: Response) => {
+try {
+  
+  const { employeeID } = req.params;
+    
+   const employe= await prisma.employes.findUnique({where:{
+    employeID:employeeID
+   }})
 
-    try {
-      const { employeID } = req.params;
-      const heureDebut = new Date()
-      const Datejour: Date = new Date();
-      heureDebut.setHours(8, 0, 0, 0)// mettre l'heure de debut a 8h00,
-      const heureFin = new Date();
-      heureFin.setHours(16, 0, 0, 0)// mettre l'heure a 16h00,
-      let heuresAbsence:number=0
+  if (!employe) {
+    
+    return res.status(HttpCode.NOT_FOUND).json(myerrors.USER_NOT_FOUND)
+    
+  } 
+    const salaire: number = employe.salaire
+    const salairejours = salaire / 22
+    const salaireheures = salairejours / 8
+    const heuresAbsences = await CalculHeures(employe.employeID)
+    const salairefinal = salaire-(heuresAbsences*salaireheures)
+    res.json({msg:`le salaire reduit est de ${salairefinal}`})
+  
 
-      const existPresence = await prisma.presences.findFirst({
-        where: {
-          employes: {
-            some: {
-              employeID
-            }
-          }
-        }
-      });
-      if (!existPresence) {
 
-        const newpresence = await prisma.presences.create({
-          data: {
-            date: Datejour,
-            heureDebut: Datejour,
-            employeIDs: [employeID],
-            estpresent: true,
-          },
-        });
-         console.log(newpresence)
-        }
-        if (existPresence?.estpresent === false) {
-
-          const heureArrive = new Date(existPresence.heureDebut);
-          if (heureArrive > heureDebut) {
-            const retardArrivee = (heureArrive.getTime() - heureDebut.getTime()) / (1000 * 60 * 60);
-            heuresAbsence += retardArrivee;
-            console.log(heuresAbsence)
-            res.json({heure:heuresAbsence})
-        }
-          // res.json(existPresence)
-    }
-  }
-    catch (error) {
-      console.error(error)
-      res.status(500).json({ message: 'Une erreur interne s\'est produite' })
-    }
-
-  }
+} catch (error) {
+    console.error(error)
+    res.status(HttpCode.INTERNAL_SERVER_ERROR).json({ msg: myerrors.INTERNAL_SERVER_ERROR });
 }
-
-export default AbsenceController
+}
+}
+export default SalaireController

@@ -25,7 +25,7 @@ const verifyEmploye = {
 
             if (!AccessToken) {
 
-                res.status(HttpCode.UNAUTHORIZED).json({ msg: `aucun jeton d'acces valide!!!` })
+                res.status(HttpCode.UNAUTHORIZED).json({ msg: `aucun jeton d'acces!!!` })
             }
             const AccessTokenverify = await mytokens.verifyAccessToken(AccessToken);
             req.employe= AccessTokenverify
